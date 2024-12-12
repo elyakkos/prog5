@@ -1,0 +1,28 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Currency Observer</title>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>  
+</head>  
+<body>  
+    <h1>Изменение курсов валют через API Центробанка РФ</h1>
+    <div>  
+        <p>Ваш client ID: <span id="client-id"></span></p>
+        <pre id="currency-data"></pre>
+    </div>  
+
+    <script>  
+        const socket = io();  
+
+        socket.on('client_id', (id) => {  
+            document.getElementById('client-id').textContent = id;  
+        });  
+
+        socket.on('currency_update', (data) => {  
+            document.getElementById('currency-data').textContent = JSON.stringify(data, null, 2);  
+        });  
+    </script>  
+</body>  
+</html>
